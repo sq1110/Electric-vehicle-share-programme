@@ -1,16 +1,21 @@
 # Electric-vehicle-share-programme
-a Electric vehicle share programme, vue2 vue-router vuex sass is used for interface and flask is used for back-end
+a Electric vehicle share programme, vue2 vue-router vuex sass is used for interface and flask is used for back-end.
 
-How to run:
+##How to run:
 
-Interface:
+
+#Interface:
 
   In terminal, input:
-  
+ ```
   npm install
   
   npm run dev
-  
-Back-end:
+```  
+#Back-end:
 
-  run api.py
+Run 
+ ```
+  DATABASE.py 
+  API.py 
+```
