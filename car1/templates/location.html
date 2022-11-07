@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row justify-content-center mt-5 mb-5">
+  <div class="col-md-10" class='mx-auto'>
+    <h2 align='center' class="posttitle">{{title}}</h2> 
+    <div class="chart" id="chartid">
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+  var appechart = echarts.init(document.getElementById('chartid'));
+
+  var chart_option = {
+    title: {
+		text: 'Location summary',
+		textStyle: {
+			color: 'black'
+		},
+		left: 'center'
+	},
+    tooltip: {
+        trigger: 'axis'
+    },
+    xAxis: {
+        name: 'Count',
+        nameLocation: 'middle',
+        nameTextStyle:{
+            padding: [20, 0, 0, 0]
+            },
+        type: 'value',
+        data: [],
+        axisLabel: {
+            show: true,
+            // rotate: 45,
+            textStyle: {
+            color: 'black'
+            }
+        },
+        axisLine:{
+            lineStyle:{
+                color:'black' 
+            }
+        }
+    },
+    yAxis: {
+        name:'Location',
+        nameLocation: 'end',
+        type: 'category',
+        data:[],
+        axisLabel: {
+            show: true,
+            textStyle: {
+            color: 'black'
+            }
+        },
+        axisLine:{
+            lineStyle:{
+                color:'black' 
+            }
+        }
+    },
+    series: [{
+        data: [],
+        type: 'bar',
+        showBackground: true,
+        backgroundStyle: {
+            color: 'rgba(180, 180, 180, 0.2)'
+        }
+    }]
+  };
+
+  appechart.setOption(chart_option);
+
+  function render_chart() {
+    $.ajax({
+      url:"/get_location_data",
+      success: function(data) {
+        console.log(data);
+        // chart_option.xAxis.data = data.x_data;
+        chart_option.yAxis.data = data.x_data;
+        chart_option.series[0].data=data.y_data;
+        appechart.setOption(chart_option)
+      },
+      error: function(xhr, type, errorThrown) {
+        }
+      })
+  }
+
+  render_chart()
+</script>
+{% endblock %}

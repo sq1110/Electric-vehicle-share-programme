@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>E-Vehicle Sharing System</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min-4.1.0.css">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+
+</head>
+
+<body>
+    <div class="wrapper" id='top_navig_bar'>
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <a href="/">
+                    <h3>Manager DashBoard</h3>
+                </a>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle"><i class="fa fa-table"></i> Charts Display</a>
+                    <ul class=" list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="/vehicletype"><i class="fa fa-tag"></i> Vehicle Type </a>
+                        </li>
+                        <li>
+                            <a href="/location"><i class="fa fa-tag"></i> Location Summary  </a>
+                        </li>
+                        <li>
+                            <a href="/hour"><i class="fa fa-tag"></i> Rent Hours Range </a>
+                        </li>
+                        <li>
+                            <a href="/fee"><i class="fa fa-tag"></i> Rent Fee Range </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid" >
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fa fa-align-justify"></i>
+                    </button>
+                </div>
+            </nav>
+
+            {% block content %}
+            {% endblock %}
+
+        </div>
+
+        <!-- Footer -->
+    </div>
+            <footer class="bg-dark text-center text-white" id='footer'>
+                <!-- Copyright -->
+                <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                    © 2022 Copyright: By @ Beifang Wang
+                </div>
+                <!-- Copyright -->
+            </footer>
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="/static/javascript/jquery.js"></script>
+    <script src="/static/javascript/jquery.mCustomScrollbar.concat.min-3.15.js"></script>
+    <script src="/static/javascript/bootstrap.min-4.1.0.js"></script>
+    <script src="/static/javascript/echarts.min.js"></script>
+    {% block script %}
+    {% endblock %}
+</body>
+
+</html>

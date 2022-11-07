@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row justify-content-center mt-5 mb-5">
+  <div class="col-md-10" class='mx-auto'>
+    <h2 align='center' class="posttitle">{{title}}</h2> 
+    <div class="chart" id="chartid">
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+  var appechart = echarts.init(document.getElementById('chartid'));
+
+  var chart_option = {
+      title: {
+      text: 'Vehicle type chart',
+      textStyle: {
+        color: 'black'
+      },
+      left: 'center'
+    },
+      tooltip: {
+          trigger: 'item',
+          formatter: '{b}: {c} ({d}%)'
+      },
+      legend: {
+          // orient: 'vertical',
+          bottom: 'bottom',
+          textStyle: {
+              color: 'black',
+          }
+      },
+      series: [
+          {
+              name: 'Brand percentage',
+              type: 'pie',
+              radius: ['30%', '55%'],
+              center: ['50%','45%'],
+              avoidLabelOverlap: false,
+              label: {
+                  show: true
+              },
+              emphasis: {
+                  label: {
+                      show: true,
+                      fontSize: '14',
+                      fontWeight: 'bold'
+                  }
+              },
+              labelLine: {
+                  show: true
+              },
+              data: [
+                  {}
+              ]
+          }
+      ]
+  };
+
+  appechart.setOption(chart_option);
+
+  function render_chart() {
+    $.ajax({
+      url:"/get_vehicle_type_data",
+      success: function(data) {
+        console.log(data);
+        chart_option.series[0].data=data.result;
+        appechart.setOption(chart_option)
+      },
+      error: function(xhr, type, errorThrown) {
+        }
+      })
+  }
+
+  render_chart()
+</script>
+{% endblock %}
